@@ -123,6 +123,11 @@ impl<S: BufRead + Write + Unpin> SmtpTransport<S> {
         Ok(transport)
     }
 
+    /// Get the underlying SmtpStream.
+    pub fn get_stream(&mut self) -> &mut SmtpStream<S> {
+        &mut self.stream
+    }
+
     /// Try to login with the given accepted mechanisms.
     pub async fn try_login(
         &mut self,
