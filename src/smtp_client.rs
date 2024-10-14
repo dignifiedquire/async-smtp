@@ -123,9 +123,19 @@ impl<S: BufRead + Write + Unpin> SmtpTransport<S> {
         Ok(transport)
     }
 
-    /// Get the underlying SmtpStream.
-    pub fn get_stream(&mut self) -> &mut SmtpStream<S> {
+    /// Gets a mutable reference to the underlying `SmtpStream`.
+    pub fn get_mut(&mut self) -> &mut SmtpStream<S> {
         &mut self.stream
+    }
+
+    /// Gets a reference to the underlying `SmtpStream``.
+    pub fn get_ref(&mut self) -> &SmtpStream<S> {
+        &self.stream
+    }
+
+    /// Consumes the SMTP transport and returns the inner `SmtpStream`.
+    pub fn into_inner(self) -> SmtpStream<S> {
+        self.stream
     }
 
     /// Try to login with the given accepted mechanisms.
