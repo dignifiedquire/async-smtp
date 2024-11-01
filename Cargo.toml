@@ -28,6 +28,7 @@ thiserror = "1"
 tokio = { version = "1", default-features = false, features = ["time", "io-util"], optional = true }
 
 [dev-dependencies]
+async-native-tls = { version = "0.5", default-features = false }
 env_logger = "^0.9"
 glob = "^0.3"
 criterion = "^0.3"
@@ -39,7 +40,17 @@ name = "send"
 path = "examples/send.rs"
 required-features = ["runtime-tokio"]
 
+[[example]]
+name = "ssl-xoauth2"
+path = "examples/ssl-xoauth2.rs"
+required-features = ["runtime-tokio"]
+
+[[example]]
+name = "starttls-xoauth2"
+path = "examples/starttls-xoauth2.rs"
+required-features = ["runtime-tokio"]
+
 [features]
 default = ["runtime-tokio"]
-runtime-async-std = ["async-std"]
-runtime-tokio = ["tokio"]
+runtime-async-std = ["async-std", "async-native-tls/runtime-async-std"]
+runtime-tokio = ["tokio", "async-native-tls/runtime-tokio"]
