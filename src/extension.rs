@@ -4,18 +4,10 @@ use crate::authentication::Mechanism;
 use crate::error::Error;
 use crate::response::Response;
 use crate::util::XText;
-use hostname;
 use std::collections::HashSet;
 use std::fmt::{self, Display, Formatter};
 use std::net::{Ipv4Addr, Ipv6Addr};
 use std::result::Result;
-
-/// Default client id.
-///
-/// It passes
-/// `smtpd_helo_restrictions = reject_non_fqdn_helo_hostname`
-/// Postfix check, but not `reject_unknown_helo_hostname`.
-const DEFAULT_DOMAIN_CLIENT_ID: &str = "localhost.localdomain";
 
 /// Client identifier, the parameter to `EHLO`
 #[derive(PartialEq, Eq, Clone, Debug)]
@@ -56,17 +48,6 @@ impl ClientId {
     /// Creates a new `ClientId` from a fully qualified domain name
     pub fn new(domain: String) -> ClientId {
         ClientId::Domain(domain)
-    }
-
-    /// Defines a `ClientId` with the current hostname, or
-    /// `localhost.localdomain` if hostname could not be found.
-    pub fn hostname() -> ClientId {
-        ClientId::Domain(
-            hostname::get()
-                .ok()
-                .and_then(|s| s.into_string().ok())
-                .unwrap_or_else(|| DEFAULT_DOMAIN_CLIENT_ID.to_string()),
-        )
     }
 }
 

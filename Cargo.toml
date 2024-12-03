@@ -22,7 +22,6 @@ anyhow = "1"
 async-std = { version = "1.11", features = ["unstable"], optional = true }
 base64 = "^0.13"
 futures = "0.3.21"
-hostname = "0.3.1"
 log = "^0.4"
 nom = "^7.0"
 thiserror = "1"
