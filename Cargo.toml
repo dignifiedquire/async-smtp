@@ -25,7 +25,7 @@ futures = "0.3.21"
 log = "^0.4"
 nom = "^7.0"
 thiserror = "1"
-tokio = { version = "1", features = ["time", "io-util"], optional = true }
+tokio = { version = "1", default-features = false, features = ["time", "io-util"], optional = true }
 
 [dev-dependencies]
 env_logger = "^0.9"
