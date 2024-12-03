@@ -43,6 +43,16 @@ jobs:
         command: test
         args: --all --no-default-features --features runtime-async-std
 
+  # Check WASI 0.2 target.
+  check_wasi:
+    name: Check wasm32-wasip2 target
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: rustup target add wasm32-wasip2
+      - name: check
+        run: cargo check --target wasm32-wasip2
+
   check_fmt_and_docs:
     name: Checking fmt and docs
     runs-on: ubuntu-latest
