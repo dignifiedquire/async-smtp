@@ -53,12 +53,14 @@ impl ClientCodec {
                     }
                     if self.escape_count == 3 {
                         self.escape_count = 0;
-                        buf.write_all(&frame[start..idx]).await?;
+                        buf.write_all(frame.get(start..idx).unwrap_or_default())
+                            .await?;
                         buf.write_all(b".").await?;
                         start = idx;
                     }
                 }
-                buf.write_all(&frame[start..]).await?;
+                buf.write_all(frame.get(start..).unwrap_or_default())
+                    .await?;
                 Ok(())
             }
         }

@@ -144,7 +144,7 @@ impl ServerInfo {
                     features.insert(Extension::StartTls);
                 }
                 Some("AUTH") => {
-                    for &mechanism in &split[1..] {
+                    for &mechanism in split.iter().skip(1) {
                         match mechanism {
                             "PLAIN" => {
                                 features.insert(Extension::Authentication(Mechanism::Plain));

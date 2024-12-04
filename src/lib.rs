@@ -21,7 +21,11 @@
     unused_import_braces,
     missing_debug_implementations,
     missing_docs,
-    clippy::explicit_iter_loop
+    clippy::explicit_iter_loop,
+    clippy::unwrap_used,
+    clippy::expect_used,
+    clippy::indexing_slicing,
+    clippy::string_slice
 )]
 
 #[cfg(not(any(feature = "runtime-tokio", feature = "runtime-async-std")))]
